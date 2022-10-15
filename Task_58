@@ -1,0 +1,71 @@
+// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
+
+Console.Clear();
+
+Console.Write("Введите кол-во строк Матрицы-1: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите кол-во столбцов Матрицы-1 равное кол-ву строк Матрицы-2: ");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите кол-во столбцов Матрицы-2: ");
+int t = Convert.ToInt32(Console.ReadLine());
+
+int[,] Martrix1 = new int[m, n];
+InputMatrix(Martrix1);
+Console.WriteLine("Матрица-1:");
+PrintMatrix(Martrix1);
+
+int[,] Martrix2 = new int[n, t];
+InputMatrix(Martrix2);
+Console.WriteLine("Матрица-2:");
+PrintMatrix(Martrix2);
+
+int[,] Matrix3 = new int[m, t];
+
+ProizvMatrix(Martrix1, Martrix2, Matrix3);
+Console.WriteLine("Произведение матриц:");
+PrintMatrix(Matrix3);
+
+void ProizvMatrix(int[,] Martrix1, int[,] Martrix2, int[,] Matrix3)
+{
+  for (int i = 0; i < Matrix3.GetLength(0); i++)
+  {
+    for (int j = 0; j < Matrix3.GetLength(1); j++)
+    {
+      int Sum = 0;
+      for (int k = 0; k < Martrix1.GetLength(1); k++)
+      {
+        Sum += Martrix1[i, k] * Martrix2[k, j];
+      }
+      Matrix3[i, j] = Sum;
+    }
+  }
+}
+
+void InputMatrix(int[,] matrix)
+{
+  for (int i = 0; i < matrix.GetLength(0); i++)
+  {
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+      matrix[i, j] = new Random().Next(1, 10);
+    }
+  }
+}
+
+void PrintMatrix (int[,] matrix)
+{
+  for (int i = 0; i < matrix.GetLength(0); i++)
+  {
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+      Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+  }
+}
